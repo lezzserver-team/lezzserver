@@ -1,0 +1,85 @@
+import SetupDev from './_Setup_Dev_Deployment.mdx'
+
+# React Vite
+
+1. **Create a React app** using the create vite command.
+```bash
+npm create vite@latest your-project -- --template react-ts
+```
+
+<SetupDev/>
+
+6. **Connect the app to your backend**
+In ```src/main.tsx```, init a new instance LezzServerReactClient and pass it to a LezzServerReactClient wrapping your app.
+```jsx title="src/main.tsx"
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+import { LezzServerProvider, LezzServerReactClient } from '@lezzserver/react'
+
+const client = new LezzServerReactClient(import.meta.env.VITE_LEZZSERVER_DEPLOYMENT_URL)
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <LezzServerProvider client={client}>
+      <App />
+    </LezzServerProvider>
+  </React.StrictMode>,
+)
+```
+
+7. **Integrate the backend into your frontend**
+In ```src/App.tsx```, use the useQuery hook to fetch from your ```api.todo.listTodo``` API function and display the data.
+and use the useMutation hook to mutate from you ```api.todo.createTodo```
+```jsx title="src/App.tsx"
+import { useState } from 'react'
+import './App.css'
+import { useQuery, useMutation } from '@lezzserver/react'
+import { api } from '../lezzserver/_generated/api'
+
+function App() {
+  const [newTodo, setNewTodo] = useState("")
+  const { data: todos, isLoading } = useQuery(api.todo.listTodo)
+
+  const mutation = useMutation(api.todo.createTodo)
+  const handleAddTodo = () => {
+    mutation.mutate({
+      name: newTodo,
+      isDone: false,
+    })
+  }
+
+  if (isLoading) return <div>loading ... </div>
+
+  return (
+    <>
+      <div>
+      </div>
+      <h1>Todo list</h1>
+      <input type="text" value={newTodo} onChange={(e) => setNewTodo(e.target.value)}/>
+      <button onClick={handleAddTodo}> add </button>
+      <div className="card">
+        {
+          todos?.map((todo) => {
+            return (
+              <div key={todo.id}>
+                <span>{todo.name}</span>
+                <span><input type="checkbox" disabled={true} checked={Boolean(todo.isDone)}/></span>
+              </div>
+            )
+          })
+        }
+
+      </div>
+    </>
+  )
+}
+
+export default App
+```
+
+8. **Start your app**
+Start the app, open http://localhost:5173/ in a browser, and see the list of todos.
+```bash
+npm run dev
+```

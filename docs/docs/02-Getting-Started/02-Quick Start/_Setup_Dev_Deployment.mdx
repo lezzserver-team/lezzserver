@@ -1,0 +1,59 @@
+2. **Install the Lezzserver client and server library**
+```bash
+cd your-project && npm @lezzserver/cli @lezzserver/react @lezzserver/server 
+```
+
+3. **Setup a Lezzserver dev deployment**\
+Next, ```run npx lezzserver dev```. This command will prompt you to log in to a web page, create a project, and save your production and deployment URLs.
+```bash
+npx lezzserver dev
+```
+
+4. **Define a schema**, Add a new file ```schema.prisma``` in the ```lezzserver/``` folder with a description of your data.
+```bash title="lezzserver/schema.prisma"
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model todo {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name      String?
+  isDone    Boolean?
+}
+
+```
+
+5. **Expose a database query**\
+Add a new file ```todo.ts``` in the ```lezzserver/``` folder with a query function that loads the data and mutation function to add data. Exporting a query and mutation function from this file declares an API function named after the file and the export name, ```api.todos.get``` and ```api.todos.post```.
+```jsx title="lezzserver/todo.ts"
+import { query, mutation, v } from '@lezzserver/server'
+import { db } from './db'
+
+export const listTodo = query({
+  handler: async () => {
+    return await db.todo.findMany({})
+  }
+})
+
+export const createTodo = mutation({
+  args: v.object({
+    name: v.string(),
+    isDone: v.boolean(),
+  }),
+  handler: async (ctx, { name, isDone }) => {
+    return await db.todo.create({
+      data: {
+        name,
+        isDone
+      }
+    })
+  }
+})
+```
+

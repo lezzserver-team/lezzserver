@@ -1,12 +1,12 @@
 ---
-sidebar_postiion: 1
+sidebar_position: 1
 ---
 
-# Installation
+# Docker 
 
 1. run lezzserver on your local machine
 ```bash
-docker run --name lezzserver -p 2222:2222 -p 2223:2223 -d lezzserver
+docker run --name lezzserver/lezzserver-lite -p 2222:2222 -p 2223:2223 -d lezzserver
 ```
 
 note: lezzserver need to expose port 2222 and 2223
@@ -19,4 +19,5 @@ npm install -g @lezzserver/cli
 ```
 
 now the lezzserver ready at your local machine, we can integrate lezzserver to your react project
+
 
