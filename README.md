@@ -1,0 +1,46 @@
+# Lezzserver
+
+Lezzserver is a Backend Application Platform that keeps you focused on building your product. Lezzserver Functions, Database, File Storage, Scheduling, and Search fit together cohesively, and are accessible from client libraries for your favorite environment. Everything in Lezzserver is live and realtime.
+
+
+## Installation
+
+1. run lezzserver on your local machine
+```bash
+docker run --name lezzserver -p 2222:2222 -p 2223:2223 -d lezzserver
+```
+
+note: lezzserver need to expose port 2222 and 2223
+
+2. create your account for the first time, open http://localhost:2222/register in your browser, click sign up button and add your account,
+
+3. install lezzserver cli globally
+```bash
+npm install -g @lezzserver/cli
+```
+
+now the lezzserver ready at your local machine, we can integrate lezzserver to your react project
+
+## React quick start
+create react vite project with lezzserver cli
+```bash
+lezzserver create AwesomeProject
+```
+
+install depedencies
+```bash
+cd AwesomeProject && npm install
+
+```
+
+run lezzserver client
+```bash
+npx lezzserver dev
+````
+
+this command will redirect you to a login page and select new project after you success login
+
+run react
+```bash
+npm run dev
+````

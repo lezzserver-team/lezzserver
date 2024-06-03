@@ -1,0 +1,5 @@
+export function DeleteTableAndIndexesModal() {
+    return (
+        <></>
+    )
+}
