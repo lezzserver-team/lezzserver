@@ -4,7 +4,7 @@ Internal functions actually same as Query or Mutation but they not able called d
 so the internal query or mutation only able called by Query/Mutation/HttpAction/Scheduler
 
 here the example to make internal function
-```js title="lezzserver/todo.ts
+```js title="lezzserver/todo.ts"
 import { internalQuery } from '@lezzserver/server'
 export const myInternalQuery = internalQuery({
   handler: async () => {
@@ -15,7 +15,7 @@ export const myInternalQuery = internalQuery({
 
 after you define the internal query, the list of internal query generated on ``lezzserver/db/internal.ts`` and you can use it to call the internal function
 lets update our previous file ``todo.ts``
-```js title="lezzserver/todo
+```js title="lezzserver/todo"
 import { internalQuery } from '@lezzserver/server'
 export const myQuery = query({
   handler: async (ctx) => {
