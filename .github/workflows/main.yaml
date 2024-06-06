@@ -57,6 +57,6 @@ jobs:
           password: ${{ secrets.SSH_PASS }}
           port: 22
           script: |
-           docker compose =f ${{ secrets.PATH }} pull
+           docker compose -f ${{ secrets.PATH }} pull
            docker compose -f ${{ secrets.PATH }} down
            docker compose -f ${{ secrets.PATH }} up -d
