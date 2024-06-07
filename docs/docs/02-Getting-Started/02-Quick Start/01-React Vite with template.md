@@ -6,7 +6,7 @@ lezzserver create your-project
 
 2. **install depedencies**
 ```bash
-cd your-project && npm install
+cd your-project && npm install @lezzserver/cli @lezzserver/react @lezzserver/server
 ```
 
 3. **run lezzserver client**

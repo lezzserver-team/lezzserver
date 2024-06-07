@@ -6,7 +6,7 @@ sidebar_position: 1
 
 1. run lezzserver on your local machine
 ```bash
-docker run --name lezzserver/lezzserver-lite -p 2222:2222 -p 2223:2223 -d lezzserver
+docker run -d --name lezzserver  -p 2222:2222 -p 2223:2223 lezzserver/lezzserver-lite
 ```
 
 note: lezzserver need to expose port 2222 and 2223
