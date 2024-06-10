@@ -113,7 +113,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ```
 
-### 9. Add Clerk PUBLISHABEL_KEY to .env
+### 9. Add Clerk PUBLISHABLE_KEY to .env
 
 ```txt title=".env"
 VITE_CLERK_PUBLISHABLE_KEY=your-publishable-key
