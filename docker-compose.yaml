@@ -1,0 +1,18 @@
+services:
+  lezzserver:
+    image: lezzserver/lezzserver-lite
+    container_name: lezzserver
+    ports:
+      - 2223:2223
+    networks:
+      - lezzserver
+
+  lezzserver-fe:
+    image: lezzserver/lezzserver-fe
+    container_name: lezzserver-fe
+    ports:
+      - 2222:2222
+    networks:
+      - lezzserver
+networks:
+  lezzserver:
