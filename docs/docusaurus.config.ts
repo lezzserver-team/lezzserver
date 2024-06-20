@@ -62,7 +62,7 @@ const config: Config = {
           label: "Docs",
         },
         {
-          href: "https://github.com/facebook/docusaurus",
+          href: "https://github.com/lezzserver-team/lezzserver",
           label: "GitHub",
           position: "right",
         },

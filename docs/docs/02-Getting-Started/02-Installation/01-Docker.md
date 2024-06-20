@@ -1,23 +1,54 @@
 ---
 sidebar_position: 1
+sidebar_title: Docker
 ---
 
-# Docker 
+## Prerequisite
 
-1. run lezzserver on your local machine
+- [Docker](https://www.docker.com) ( >= 26.1.4 is recommended )
+- [NodeJS](https://nodejs.org/en) ( >= v20.14 is recommended )
+
+## Manual Installation
+
+1. **Run lezzserver on your local machine**
+
 ```bash
-docker run -d --name lezzserver  -p 2222:2222 -p 2223:2223 lezzserver/lezzserver-lite
+docker network create lezzserver
+docker run -d --name lezzserver --network lezzserver -p 2223:2223 lezzserver/lezzserver-lite
 ```
 
-note: lezzserver need to expose port 2222 and 2223
+2. **Install Lezzserver UI (optional)**
 
-2. create your account for the first time, open http://localhost:2222/register in your browser, click sign up button and add your account,
+```bash
+docker run -d --name lezzserver-ui --network lezzserver -p 2222:2222 lezzserver/lezzserver-fe
+```
 
-3. install lezzserver cli globally
+## Install by Lezzserver CLI
+
+1. **install lezzserver cli globally**
+
 ```bash
 npm install -g @lezzserver/cli
 ```
 
+2. **install lezzserver**
+
+```bash
+lezzserver install
+```
+
+3. **you will asked to install lezzserver ui to (optional)**
+
+```bash
+? Would you like to install Lezzserver UI ? (Y/n)
+```
+
+:::info
+Install command basically just run command `docker compose up` based on lezzserver [Docker File](https://github.com/lezzserver-team/lezzserver/blob/main/docker-compose.yaml)
+:::
+
 now the lezzserver ready at your local machine, we can integrate lezzserver to your react project
 
-
+:::warning
+if you have installed this before then make sure you logout from UI and CLI (`lezzserver logout`) first
+:::
